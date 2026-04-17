@@ -1,0 +1,20 @@
+// Modelo de relação entre pista, artista e álbum
+
+// Um artista pode ter vários álbuns
+// Um álbum pertence a um artista
+
+// Um álbum pode ter várias pistas (músicas)
+// Uma pista pertence a um álbum
+
+// Relação geral:
+// Artista -> Álbum -> Pista
+
+// Exemplo:
+// Artista: Drake
+// Álbum: Scorpion
+// Pista: God's Plan
+
+// Estrutura sugerida (banco de dados):
+// artistas (id, nome)
+// albuns (id, nome, artista_id)
+// pistas (id, nome, album_id)

@@ -1,0 +1,22 @@
+CREATE table  IF NOT EXISTS Clientes (
+  id SERIAL PRIMARY key,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  status VARCHAR(20) DEFAULT 'ativo',
+  limite numeric(20,2) check (limite >= 0),
+  criado_em timestamp default NOW 
+  );
+
+--  Primeiro criamos a tabela pai
+ create table AUTORES (
+  id serial primary key,
+  nome varchar(100) NOT NULL
+);
+
+-- DEPOIS A TABELA FILHA (que faz referência)
+create table livros (
+  id serial primary key,
+  titulo varchar(150) not null,
+  preco numeric(10,2) not null,
+  autor_id integer references autores(id) on delete restrict
+);
