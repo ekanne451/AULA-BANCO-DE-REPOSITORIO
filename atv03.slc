@@ -1,0 +1,63 @@
+-- tabela errada ARTISTAS
+CREATE TABLE artistas_caju (
+    id INTEGER,
+    nome VARCHAR(100),
+    pais VARCHAR(50),
+    data_cadastro TIMESTAMP
+);
+
+-- tabela correta ARTISTAS
+CREATE TABLE artistas_caju (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    pais VARCHAR(50),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- tabela errada ALBUMS
+CREATE TABLE albums_caju (
+    id INTEGER,
+    titulo VARCHAR(100),
+    ano INTEGER,
+    artista_id INTEGER,
+    preco REAL
+);
+
+-- tabela correta ALBUMS
+CREATE TABLE albums_caju (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    ano INTEGER NOT NULL CHECK (ano > 1850),
+    artista_id INTEGER NOT NULL,
+    preco NUMERIC(10,2),
+    FOREIGN KEY (artista_id) REFERENCES artistas_caju(id)
+);
+
+-- tabela errada faixas
+CREATE TABLE faixas_caju (
+    id INTEGER,
+    nome VARCHAR(100),
+    duracao INTEGER,
+    album_id INTEGER
+);
+
+-- tabela corretas faixas
+CREATE TABLE faixas_caju (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    duracao INTEGER CHECK (duracao > 0),
+    album_id INTEGER NOT NULL,
+    FOREIGN KEY (album_id) REFERENCES albums_caju(id)
+);
+
+-- tabela errada genero
+ALTER TABLE faixas_caju
+ADD genero VARCHAR(50);
+
+
+-- tabela corretas genero
+ALTER TABLE faixas_caju
+ADD genero VARCHAR(50),
+ADD CONSTRAINT chk_genero CHECK (
+    genero IN ('Pop', 'Rock', 'Jazz', 'Hip-Hop', 'Eletrônica')
+);
