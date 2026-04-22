@@ -1,0 +1,21 @@
+INSERT INTO  artistas_caju
+        (nome, pais origem)
+    VALUES ('Djavan', 'Brasil');
+
+-- UPDATE simples
+UPDATE album_caju
+  SET preco = 34.90
+WHERE id = 1;
+
+-- UPDATE com expressão
+UPDATE album_caju
+    SET  preco = preco * 1.10
+WHERE artistas_id = 1;
+
+-- Remoção cirúgica
+DELETE FROM faixas_caju
+WHERE id = 1;
+
+-- Remoção catastrófica
+-- CUIDADO: sem WHERE, atuliza/delta TODOS os registros
+
